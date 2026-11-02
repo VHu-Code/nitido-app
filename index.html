@@ -48,7 +48,7 @@ btn.addEventListener("click", async () => {
     for (let i = 0; i < TOTAL; i++) {
       status.textContent = "Preparando o arquivo " + (i + 1) + " de " + TOTAL + "…";
       const name = "parte-" + String(i).padStart(2, "0") + ".txt";
-      const res = await fetch(name);
+      const res = await fetch("https://raw.githubusercontent.com/VHu-Code/nitido-app/main/" + name);
       if (!res.ok) throw new Error("Não achei " + name);
       b64 += (await res.text()).trim();
     }

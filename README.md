@@ -1,6 +1,6 @@
 # Nítido
 
-Página para baixar a extensão. Não é para clonar este repositório.
+Página para baixar a extensão. Não clone este repositório.
 
 Abra e clique em **Baixar Nitido.zip**:
 
