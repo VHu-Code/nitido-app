@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nítido — baixar a extensão</title>
+<style>
+  body { margin: 0; font-family: Georgia, "Iowan Old Style", Palatino, serif; background: #f6f3ee; color: #1c1917; }
+  main { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  .bar { height: 4px; background: #c2410c; }
+  .kicker { letter-spacing: .04em; font-family: system-ui, sans-serif; font-size: .85rem; color: #78716c; }
+  h1 { font-size: 2.4rem; line-height: 1.15; font-weight: 500; margin: .4rem 0 1rem; }
+  p, li { line-height: 1.55; font-size: 1.05rem; }
+  button { font-family: system-ui, sans-serif; background: #c2410c; color: #fffaf5; border: 0; border-radius: 999px; padding: .85rem 1.3rem; font-size: 1rem; cursor: pointer; }
+  button:disabled { opacity: .6; cursor: wait; }
+  ol { padding-left: 1.2rem; }
+  li { margin: .45rem 0; }
+  .note { color: #57534e; font-size: .95rem; }
+  #status { font-family: system-ui, sans-serif; min-height: 1.4rem; }
+</style>
+</head>
+<body>
+<div class="bar"></div>
+<main>
+  <p class="kicker">Extensão para Chrome e Edge</p>
+  <h1>Baixar o Nítido</h1>
+  <p>Esta página baixa só o arquivo da extensão. Não precisa clonar repositório nem rodar nada no computador.</p>
+  <p><button id="baixar" type="button">Baixar Nitido.zip</button></p>
+  <p id="status" class="note"></p>
+  <h2>Instalar</h2>
+  <ol>
+    <li>Extraia o zip. A pasta se chama nitido.</li>
+    <li>No Chrome, abra chrome://extensions. No Edge, edge://extensions.</li>
+    <li>Ative o Modo do desenvolvedor.</li>
+    <li>Clique em Carregar sem compactação e escolha a pasta que tem o manifest.json.</li>
+    <li>Aceite o acesso aos sites, fixe o ícone, dê play no vídeo e clique no Nítido.</li>
+  </ol>
+  <p class="note">O M3U8 vira MP4 sem reencodar. Imagens, PDFs e outros vídeos ficam na mesma janela, com o nome do site. Não remove DRM e não grava transmissão ao vivo.</p>
+</main>
+<script>
+const TOTAL = 16;
+const btn = document.getElementById("baixar");
+const status = document.getElementById("status");
+btn.addEventListener("click", async () => {
+  btn.disabled = true;
+  try {
+    let b64 = "";
+    for (let i = 0; i < TOTAL; i++) {
+      status.textContent = "Preparando o arquivo " + (i + 1) + " de " + TOTAL + "…";
+      const name = "parte-" + String(i).padStart(2, "0") + ".txt";
+      const res = await fetch(name);
+      if (!res.ok) throw new Error("Não achei " + name);
+      b64 += (await res.text()).trim();
+    }
+    status.textContent = "Gerando o zip…";
+    const bin = atob(b64);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    const blob = new Blob([bytes], { type: "application/zip" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Nitido.zip";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    status.textContent = "O download do Nitido.zip começou. Extraia a pasta e carregue no navegador.";
+  } catch (err) {
+    status.textContent = err instanceof Error ? err.message : "Não consegui baixar.";
+  } finally {
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
