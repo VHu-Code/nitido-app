@@ -1,9 +1,8 @@
 # Nítido
 
-Página para baixar a extensão. Não clone este repositório.
+Página de venda da extensão Nítido (R$ 20, pagamento único):
 
-Abra e clique em **Baixar Nitido.zip**:
+https://vhu-code.github.io/nitido-app/
 
-https://htmlpreview.github.io/?https://raw.githubusercontent.com/VHu-Code/nitido-app/main/index.html
-
-O código-fonte continua no repositório privado `nitido`.
+O código-fonte e o Nitido.zip oficial ficam no repositório privado `nitido`
+(`public/nitido.zip`). A entrega ao comprador é feita pelo WhatsApp.

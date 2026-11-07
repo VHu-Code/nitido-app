@@ -3,74 +3,90 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nítido — baixar a extensão</title>
+<title>Nítido — a extensão que baixa suas aulas e vídeos</title>
+<meta name="description" content="Extensão para Chrome e Edge que salva aulas e vídeos em MP4 na maior qualidade, com fila de downloads e o nome real da aula. R$ 20, pagamento único.">
 <style>
-  body { margin: 0; font-family: Georgia, "Iowan Old Style", Palatino, serif; background: #f6f3ee; color: #1c1917; }
-  main { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
-  .bar { height: 4px; background: #c2410c; }
-  .kicker { letter-spacing: .04em; font-family: system-ui, sans-serif; font-size: .85rem; color: #78716c; }
-  h1 { font-size: 2.4rem; line-height: 1.15; font-weight: 500; margin: .4rem 0 1rem; }
-  p, li { line-height: 1.55; font-size: 1.05rem; }
-  button { font-family: system-ui, sans-serif; background: #c2410c; color: #fffaf5; border: 0; border-radius: 999px; padding: .85rem 1.3rem; font-size: 1rem; cursor: pointer; }
-  button:disabled { opacity: .6; cursor: wait; }
-  ol { padding-left: 1.2rem; }
-  li { margin: .45rem 0; }
-  .note { color: #57534e; font-size: .95rem; }
-  #status { font-family: system-ui, sans-serif; min-height: 1.4rem; }
+  :root {
+    --accent: #c2410c;
+    --ink: #1c1917;
+    --muted: #57534e;
+    --bg: #f6f3ee;
+    --card: #fffdf9;
+    --line: #e7e0d2;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Georgia, "Iowan Old Style", Palatino, serif; background: var(--bg); color: var(--ink); }
+  main { max-width: 44rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  .bar { height: 4px; background: var(--accent); }
+  .kicker { letter-spacing: .04em; font-family: system-ui, sans-serif; font-size: .85rem; color: var(--muted); }
+  h1 { font-size: 2.6rem; line-height: 1.12; font-weight: 500; margin: .4rem 0 1rem; }
+  h1 em { font-style: normal; color: var(--accent); }
+  h2 { font-size: 1.4rem; font-weight: 500; margin: 2.2rem 0 .6rem; }
+  p, li { line-height: 1.6; font-size: 1.05rem; }
+  .note { color: var(--muted); font-size: .95rem; }
+  video { width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #000; display: block; }
+  .preco-box { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem 1.25rem; margin: 1.6rem 0; }
+  .preco { font-family: system-ui, sans-serif; }
+  .preco .valor { font-size: 2rem; font-weight: 700; color: var(--accent); }
+  .preco .detalhe { font-size: .85rem; color: var(--muted); }
+  .zap { display: inline-flex; align-items: center; gap: .6rem; font-family: system-ui, sans-serif; background: var(--accent); color: #fffaf5; border: 0; border-radius: 999px; padding: .95rem 1.5rem; font-size: 1.05rem; font-weight: 600; text-decoration: none; margin-left: auto; }
+  .zap:hover { filter: brightness(1.08); }
+  .zap svg { flex: none; }
+  ul.lista { padding-left: 1.2rem; }
+  ul.lista li { margin: .5rem 0; }
+  ul.lista li strong { font-family: system-ui, sans-serif; font-size: .98rem; }
+  .faq p { margin: .3rem 0 1rem; }
+  .faq strong { font-family: system-ui, sans-serif; font-size: .98rem; }
+  footer { border-top: 1px solid var(--line); margin-top: 3rem; padding-top: 1.2rem; }
 </style>
 </head>
 <body>
 <div class="bar"></div>
 <main>
   <p class="kicker">Extensão para Chrome e Edge</p>
-  <h1>Baixar o Nítido</h1>
-  <p>Esta página baixa só o arquivo da extensão. Não precisa clonar repositório nem rodar nada no computador.</p>
-  <p class="note"><strong>Versão 1.1</strong> — fila de downloads (até 4 aulas ao mesmo tempo), funciona em sites de curso que recusavam com erro 403 e painel novo. Quem já tem a extensão: baixe de novo, troque os arquivos da pasta e clique em Atualizar (⟳) em chrome://extensions.</p>
-  <p><button id="baixar" type="button">Baixar Nitido.zip</button></p>
-  <p id="status" class="note"></p>
-  <h2>Instalar</h2>
-  <ol>
-    <li>Extraia o zip. A pasta se chama nitido.</li>
-    <li>No Chrome, abra chrome://extensions. No Edge, edge://extensions.</li>
-    <li>Ative o Modo do desenvolvedor.</li>
-    <li>Clique em Carregar sem compactação e escolha a pasta que tem o manifest.json.</li>
-    <li>Aceite o acesso aos sites, fixe o ícone, dê play no vídeo e clique no Nítido.</li>
-  </ol>
-  <p class="note">O M3U8 vira MP4 sem reencodar, na maior qualidade. Dá para baixar várias aulas de uma vez: o painel tem fila com barra de progresso por item. Imagens, PDFs e outros vídeos ficam na mesma janela, com o nome do site. Não remove DRM e não grava transmissão ao vivo.</p>
+  <h1>Pare de perder suas aulas. <em>Baixe todas de uma vez.</em></h1>
+  <p>Curso que expira, área de membros que sai do ar, internet que cai no meio do vídeo. O <strong>Nítido</strong> salva as aulas que você comprou direto no seu computador, em MP4, <strong>na maior qualidade que o site oferece</strong> — sem reencodar, sem perder nitidez, sem instalar programa pesado.</p>
+
+  <h2>Veja funcionando</h2>
+  <video controls preload="metadata" src="demo.mp4"></video>
+  <p class="note">Demonstração real: dê play no vídeo do site, clique no Nítido e baixe.</p>
+
+  <h2>O que ele faz</h2>
+  <ul class="lista">
+    <li><strong>Fila de downloads</strong> — clique em "Baixar todos" e as aulas descem em sequência, até 4 ao mesmo tempo, cada uma com a própria barra de progresso.</li>
+    <li><strong>Nome real da aula</strong> — o arquivo sai com o nome da aula que aparece na página, organizado em <code>Downloads/Nítido/nome-do-site/</code>. Nada de "video_final_02.mp4".</li>
+    <li><strong>Maior qualidade, sem reencodar</strong> — o M3U8 vira MP4 idêntico ao original. O que é 1080p chega 1080p.</li>
+    <li><strong>Funciona onde outros falham</strong> — sites de curso que bloqueiam downloaders comuns com "erro 403" funcionam aqui: a extensão baixa por dentro da sua própria sessão.</li>
+    <li><strong>Tudo da página</strong> — MP4, WebM, imagens, PDFs e apostilas aparecem no mesmo painel, prontos para salvar.</li>
+  </ul>
+
+  <div class="preco-box">
+    <div class="preco">
+      <div class="valor">R$ 20</div>
+      <div class="detalhe">pagamento único · sem mensalidade · atualizações incluídas</div>
+    </div>
+    <a class="zap" href="https://wa.me/5574999378375?text=Oi!%20Quero%20a%20extens%C3%A3o%20N%C3%ADtido%20(R$%2020)." rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.8-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4 0-.5.2-.8l.5-.7c.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.2 2.1-.6 3.5a11 11 0 0 0 4.3 4.7c1.6.9 2.8 1.1 3.7.9.6-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0 0-.2-.1-.4-.2z"/></svg>
+      Quero a minha — chamar no WhatsApp
+    </a>
+  </div>
+  <p class="note">Você chama, combina o Pix de R$ 20 e recebe na hora o arquivo da extensão com o passo a passo de instalação (leva 2 minutos, sem conhecimento técnico).</p>
+
+  <h2>Perguntas rápidas</h2>
+  <div class="faq">
+    <strong>Preciso pagar de novo quando sair versão nova?</strong>
+    <p>Não. Comprou uma vez, recebe as atualizações.</p>
+    <strong>Funciona em qual navegador?</strong>
+    <p>Chrome, Edge e Brave (qualquer navegador baseado em Chromium).</p>
+    <strong>É difícil de instalar?</strong>
+    <p>Não: você extrai uma pasta e carrega no navegador. O passo a passo vai junto, e eu te ajudo pelo WhatsApp se precisar.</p>
+    <strong>Baixa qualquer vídeo?</strong>
+    <p>Baixa o que você tem acesso para assistir. Não remove DRM e não grava transmissão ao vivo.</p>
+  </div>
+
+  <footer>
+    <p class="note">Nítido · dúvidas e compra: <a href="https://wa.me/5574999378375" rel="noopener">WhatsApp (74) 99937-8375</a></p>
+  </footer>
 </main>
-<script>
-const TOTAL = 17;
-const btn = document.getElementById("baixar");
-const status = document.getElementById("status");
-btn.addEventListener("click", async () => {
-  btn.disabled = true;
-  try {
-    let b64 = "";
-    for (let i = 0; i < TOTAL; i++) {
-      status.textContent = "Preparando o arquivo " + (i + 1) + " de " + TOTAL + "…";
-      const name = "parte-" + String(i).padStart(2, "0") + ".txt";
-      const res = await fetch("https://raw.githubusercontent.com/VHu-Code/nitido-app/main/" + name);
-      if (!res.ok) throw new Error("Não achei " + name);
-      b64 += (await res.text()).trim();
-    }
-    status.textContent = "Gerando o zip…";
-    const bin = atob(b64);
-    const bytes = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    const blob = new Blob([bytes], { type: "application/zip" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "Nitido.zip";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    status.textContent = "O download do Nitido.zip começou. Extraia a pasta e carregue no navegador.";
-  } catch (err) {
-    status.textContent = err instanceof Error ? err.message : "Não consegui baixar.";
-  } finally {
-    btn.disabled = false;
-  }
-});
-</script>
 </body>
 </html>
